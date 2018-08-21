@@ -100,7 +100,10 @@ def curthooks():
 
     networking = config.get("network")
     if networking:
+        curtin_dir = os.path.join(target, "curtin")
         networking_file = os.path.join(target, "network.json")
+        if os.path.isdir(curtin_dir):
+            networking_file = os.path.join(curtin_dir, "network.json")
         with open(networking_file, "wb") as fd:
             fd.write(json.dumps(networking, indent=2).encode('utf-8'))
 
